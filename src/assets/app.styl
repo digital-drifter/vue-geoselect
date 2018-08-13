@@ -1,0 +1,124 @@
+/** Dimensions */
+$fullHeight = 100vh
+$navbarHeight = 3.5rem
+$footerHeight = 3rem
+$jumbotronHeight = 5rem
+$controlsHeight = 21rem
+
+/** Colors */
+$backgroundColor = #d7ccc8
+$primaryColor = #009688
+$secondaryColor = #455a64
+$accentColor = #455a64
+$progressbarColor = #76ff03
+$headerColor = #e0f7fa
+
+/** Font Families */
+$bodyFont = 'Poppins', sans-serif
+$headerFont = 'Bungee', sans-serif
+
+/** Functions */
+calcHeight(h)
+  "calc(%s - %s)" % ($fullHeight h)
+
+/** Mixins */
+fontWeight(n)
+  font-weight n !important
+
+/** Custom Styles */
+*
+  font-family $bodyFont
+  font-weight 200
+  border-radius 0 !important
+  margin 0
+  padding 0
+  color $secondaryColor !important
+
+html body div#app
+  height $fullHeight
+
+  nav
+    &.bg-primary, a
+      fontWeight(500)
+      background-color $primaryColor !important
+      font-family $headerFont
+      color $headerColor!important
+
+  main
+    height calcHeight($navbarHeight + $footerHeight)
+
+    .jumbotron
+      margin-bottom 0
+      height calcHeight($navbarHeight + $footerHeight)
+      min-height calcHeight($navbarHeight + $footerHeight)
+      background-color $backgroundColor
+
+      h1
+        span
+          fontWeight(700)
+          font-family $headerFont
+          text-align center
+
+        div
+          display flex
+          justify-content center
+
+        svg
+          color $secondaryColor
+          animation spin 2.75s linear infinite
+          
+      p.lead
+        text-align center
+
+  footer
+    padding 1 rem
+    position fixed
+    bottom 0
+    height $footerHeight
+    background-color $primaryColor
+    z-index 999
+
+    span
+      fontWeight(500)
+
+/** Buttons */
+button
+  height calc(2.25rem + 2px)
+
+/** Fade Transition */
+.fade-enter-active .fade-leave-active
+  transition-property opacity
+  transition-duration .6s
+
+.fade-enter-active
+  transition-delay .5s
+
+.fade-enter .fade-leave-active
+  opacity 0
+
+/** Progress bar */
+.progress-bar
+  color $accentColor
+  background-color $progressbarColor
+
+.progress-bar-striped
+  background-image linear-gradient(45deg, rgba(100, 100, 100, 0.15) 25%, transparent 25%, transparent 50%, rgba(100, 100, 100, 0.15) 50%, rgba(100, 100, 100, 0.15) 75%, transparent 75%, transparent)
+
+.progress-bar-animated
+  animation progress-bar-stripes .5s linear infinite
+
+/** Leaflet Map */
+.map
+  bottom 0
+  top 0
+  height calcHeight($navbarHeight + $controlsHeight + $footerHeight)
+
+/** Animations */
+@keyframes spin {
+  from {
+    transform rotateY(360deg)
+  }
+  to {
+    transform rotateY(0deg)
+  }
+}
